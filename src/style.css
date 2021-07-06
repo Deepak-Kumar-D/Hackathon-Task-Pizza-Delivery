@@ -1,0 +1,395 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: #717744;
+}
+
+.titlebar,
+.logo,
+.main,
+.credentials,
+.login,
+.loginForm,
+.createForm,
+.user,
+.imageBg,
+.image,
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titlebar {
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #fefefe;
+  width: 100%;
+}
+
+.titlebar h1 {
+  color: #717744;
+  font-size: 2.5rem;
+  text-shadow: 0 0.1rem 0.25rem rgb(129, 129, 129);
+}
+
+.logo {
+  margin: 0 0.5rem;
+  border: 0.2rem solid #717744;
+  border-radius: 50%;
+  padding: 0.3rem;
+  box-shadow: 0 2px 5px 0 rgb(100, 99, 99);
+}
+
+.logo img {
+  width: 4rem;
+  filter: sepia(0.5);
+  -webkit-animation: infinite-spinning 5s;
+}
+
+.main,
+.login,
+.user {
+  min-height: 78vh;
+}
+
+.credentials {
+  padding: 2rem;
+  flex-direction: column;
+  background-color: #fefefe;
+  height: 30rem;
+  width: 30rem;
+  border-radius: 0.2rem;
+  box-shadow: 0 5px 8px 2px rgb(100, 99, 99);
+}
+
+.credentials p {
+  color: #717744;
+  font-size: 1.2rem;
+}
+
+.login,
+.loginForm {
+  flex-direction: column;
+}
+
+.btn,
+form {
+  margin: 2rem;
+  background-color: #fefefe;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+}
+
+.btn {
+  width: 20rem;
+  padding: 1rem;
+  color: #abac7f;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: #373d20;
+  box-shadow: 0 2px 5px 0 rgb(100, 99, 99);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+form h2 {
+  padding: 1rem 0;
+  color: #717744;
+}
+
+form {
+  padding: 2rem;
+  width: 30rem;
+  text-align: center;
+  border-radius: 0.2rem;
+}
+
+.login form {
+  height: 30rem;
+}
+
+.loginForm {
+  height: 80%;
+  padding: 2rem 0;
+}
+
+.loginForm input,
+label {
+  color: #717744;
+  width: 100%;
+  text-align: start;
+}
+
+.loginForm label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1rem 0;
+}
+
+.loginForm input {
+  padding: 1rem;
+  font-size: 1rem;
+  border: 0.05rem solid #abac7f;
+  border-radius: 0.2rem;
+  outline-color: #717744;
+}
+
+.back {
+  position: absolute;
+}
+
+.back p {
+  color: #717744;
+  cursor: pointer;
+}
+
+.createForm {
+  height: max-content;
+}
+
+a {
+  float: right;
+  text-decoration: none;
+  color: #717744;
+  letter-spacing: normal;
+}
+
+input[type="submit"] {
+  color: #abac7f;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: #373d20;
+  box-shadow: 0 2px 5px 0 rgb(100, 99, 99);
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 0.05rem;
+  transition: 0.25s;
+}
+
+.btn:hover,
+input[type="submit"]:hover {
+  background-color: #abac7f;
+  color: #373d20;
+  font-weight: bold;
+  letter-spacing: 0.7rem;
+}
+
+.imageBg {
+  flex-direction: column;
+  margin: 3rem;
+  padding: 1rem;
+  background-color: #373d20;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 1px rgb(75, 75, 75);
+  position: relative;
+  width: 13rem;
+}
+
+.imageBg p {
+  padding-top: 0.5rem;
+  color: #abac7f;
+  text-transform: capitalize;
+  letter-spacing: 0.2rem;
+  text-align: center;
+}
+
+.image {
+  height: 10rem;
+  width: 10rem;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  transition: 0.3s ease-in-out;
+}
+
+.image:hover {
+  filter: sepia(0.7);
+  width: 12rem;
+  z-index: 2;
+}
+
+.image img {
+  width: 100%;
+}
+
+.userDash {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.priceTag {
+  background-color: #abac7f;
+  font-size: 1rem;
+  color: #373d20;
+  font-weight: 500;
+  top: 0.2rem;
+  right: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  position: absolute;
+  border-radius: 1rem 0 1rem 1rem;
+  box-shadow: 0 2px 10px 1px rgb(37, 37, 37);
+  transition: 0.25s ease-in-out;
+  z-index: 3;
+}
+
+.priceTag:hover {
+  background-color: #717744;
+  font-size: 1.2rem;
+}
+
+.btnCart {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.btnCart button {
+  font-size: 1.5rem;
+  background-color: #abac7f;
+  color: #373d20;
+
+  border: none;
+  border-radius: 50%;
+  padding: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.btnCart:hover button {
+  background-color: #373d20;
+  color: #abac7f;
+}
+
+.btnCart span {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  top: 1.2rem;
+  right: 2.1rem;
+  background-color: #373d20;
+  color: #abac7f;
+  position: absolute;
+
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnCart:hover span {
+  background-color: #abac7f;
+  color: #373d20;
+}
+
+/* Cart panel */
+.cartPanel {
+  height: fit-content;
+  width: fit-content;
+  background-color: white;
+  box-shadow: -2px 2px 10px 0px rgba(10, 10, 10, 0.753);
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  z-index: 99;
+}
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  width: 2rem;
+  border: 0.1rem solid #373d20;
+  border-radius: 0.2rem;
+  background-color: #abac7f;
+  font-weight: 500;
+  cursor: pointer;
+  color: #373d20;
+  transition: 0.5s;
+}
+
+.btnRemove {
+  width: 50%;
+  border: 0.1rem solid #373d20;
+  border-radius: 0.2rem;
+  background-color: #abac7f;
+  font-weight: 500;
+  cursor: pointer;
+  color: #373d20;
+  transition: 0.5s;
+}
+
+.closebtn:hover,
+.btnRemove:hover {
+  background-color: #717744;
+  color: #abac7f;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 0.5rem 0;
+}
+
+.cartRow h6,
+.cartRow p,
+.checkout h3,
+.checkout h2 {
+  color: #717744;
+}
+
+.cartRow h6 {
+  font-size: 1rem;
+}
+
+.checkout p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.checkout h3 {
+  font-size: 1.5rem;
+}
+
+@-webkit-keyframes infinite-spining {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer {
+  text-align: center;
+  background-color: #373d20;
+  color: #abac7f;
+  padding: 3rem 0;
+}
