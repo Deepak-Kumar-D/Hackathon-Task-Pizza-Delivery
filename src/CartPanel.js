@@ -20,16 +20,16 @@ export function CartPanel({ show, setShow, item, setItem }) {
   };
 
   // Addition function to find the total price
-  const sum = () => {
-    let addition = 0;
-    for (let i = 0; i < item.length; i++) {
-      addition += item[i].price;
-    }
-
-    setTotal(addition);
-  };
 
   useEffect(() => {
+    const sum = () => {
+      let addition = 0;
+      for (let i = 0; i < item.length; i++) {
+        addition += item[i].price;
+      }
+
+      setTotal(addition);
+    };
     sum();
   }, [item]);
 

@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { GoBack } from "./GoBack.js";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -20,6 +23,7 @@ const schema = yup.object().shape({
 });
 
 export function CreateUser() {
+  const [open, setOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -27,7 +31,7 @@ export function CreateUser() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const ele = await fetch("/users", {
+    const ele = await fetch("https://pizza-town-db.herokuapp.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",
@@ -41,8 +45,13 @@ export function CreateUser() {
       }),
     }).then((rec) => rec.json());
 
-    console.log(data);
-    console.log(errors);
+    if (ele) {
+      setOpen(true);
+      toast.success("Registration Successul! Login Again!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
   };
 
   return (
@@ -117,6 +126,8 @@ export function CreateUser() {
           <input type="submit" value="Submit" />
         </div>
       </form>
+
+      <ToastContainer />
     </section>
   );
 }

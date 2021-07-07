@@ -14,7 +14,7 @@ export function LoginPage() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const el = await fetch("/users", {
+    const el = await fetch("https://pizza-town-db.herokuapp.com/users", {
       method: "GET",
     });
     const conv = await el.json();
@@ -26,6 +26,7 @@ export function LoginPage() {
 
     console.log(errors);
   };
+
   return (
     <section className="login">
       <form method="GET" onSubmit={handleSubmit(onSubmit)}>
