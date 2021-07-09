@@ -14,7 +14,7 @@ export function LoginPage() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const obj = await fetch("/login", {
+    const obj = await fetch("https://pizza-town-db.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

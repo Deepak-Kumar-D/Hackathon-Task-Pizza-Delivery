@@ -33,7 +33,7 @@ export function CreateUser() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const obj = await fetch("/register", {
+    const obj = await fetch("https://pizza-town-db.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",
