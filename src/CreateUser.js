@@ -2,9 +2,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { GoBack } from "./GoBack.js";
-import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -13,8 +14,8 @@ const schema = yup.object().shape({
   address: yup.string().required(),
   password: yup
     .string()
-    .min(6, "Minimum 10 characters!")
-    .max(15, "Maximum 10 characters!")
+    .min(6, "⚠ Minimum 10 characters!")
+    .max(15, "⚠ Maximum 10 characters!")
     .required(),
   confirmPassword: yup
     .string()
@@ -23,7 +24,8 @@ const schema = yup.object().shape({
 });
 
 export function CreateUser() {
-  const [open, setOpen] = useState(false);
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -31,7 +33,7 @@ export function CreateUser() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const ele = await fetch("https://pizza-town-db.herokuapp.com/users", {
+    const obj = await fetch("/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",
@@ -43,16 +45,23 @@ export function CreateUser() {
         address: data.address,
         password: data.password,
       }),
-    }).then((rec) => rec.json());
+    });
 
-    if (ele) {
-      setOpen(true);
-      toast.success("Registration Successul! Login Again!", {
+    const reg = await obj.json();
+
+    if (reg) {
+      toast.success("Registration Successul! Please Login Now!", {
         position: "top-right",
         autoClose: 3000,
       });
+
+      setInterval(() => {
+        history.push("/login");
+      }, 3100);
     }
   };
+
+  useEffect(() => {}, []);
 
   return (
     <section className="createForm">
@@ -70,7 +79,9 @@ export function CreateUser() {
             placeholder="Full name"
             {...register("name")}
           />
-          <p>{errors.name && "We would love to know your name!"}</p>
+          <p className="message">
+            {errors.name && "⚠ We would love to know your name!"}
+          </p>
           <br />
 
           <label htmlFor="email">E-mail Id</label>
@@ -80,7 +91,7 @@ export function CreateUser() {
             placeholder="E-mail Id"
             {...register("email")}
           />
-          <p>{errors.email && "Email is required!"}</p>
+          <p className="message">{errors.email && "⚠ Email is required!"}</p>
           <br />
 
           <label htmlFor="phone">Phone</label>
@@ -90,7 +101,9 @@ export function CreateUser() {
             placeholder="Contact number"
             {...register("phone")}
           />
-          <p>{errors.phone && "Oops! Contact number is also required!"}</p>
+          <p className="message">
+            {errors.phone && "⚠ Oops! Contact number is also required!"}
+          </p>
           <br />
 
           <label htmlFor="address">Address</label>
@@ -100,7 +113,9 @@ export function CreateUser() {
             placeholder="Address"
             {...register("address")}
           />
-          <p>{errors.address && "We need your address to deliver!"}</p>
+          <p className="message">
+            {errors.address && "⚠ We need your address to deliver!"}
+          </p>
           <br />
 
           <label htmlFor="password">Password</label>
@@ -110,7 +125,7 @@ export function CreateUser() {
             placeholder="Please type a strong password"
             {...register("password")}
           />
-          <p>{errors.password?.message}</p>
+          <p className="message">{errors.password?.message}</p>
           <br />
 
           <label htmlFor="confirmPassword">Confirm Password</label>
@@ -120,7 +135,9 @@ export function CreateUser() {
             placeholder="Please confirm the password"
             {...register("confirmPassword")}
           />
-          <p>{errors.confirmPassword && "Oops! Passwords should match!"}</p>
+          <p className="message">
+            {errors.confirmPassword && "⚠ Oops! Passwords should match!"}
+          </p>
           <br />
 
           <input type="submit" value="Submit" />

@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { GoBack } from "./GoBack.js";
-import { Link, Redirect } from "react-router-dom";
-
-import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function LoginPage() {
-  const [userdashboard, setUserdashboard] = useState(false);
+  const history = useHistory();
 
   const {
     register,
@@ -14,53 +14,73 @@ export function LoginPage() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const el = await fetch("https://pizza-town-db.herokuapp.com/users", {
-      method: "GET",
+    const obj = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
     });
-    const conv = await el.json();
-    console.log(conv);
 
-    if (conv) {
-      setUserdashboard(true);
+    const login = await obj.json();
+
+    if (obj.status === 400) {
+      toast.error("Invalid Credentials!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    } else {
+      toast.success("Login Successful!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      setInterval(() => {
+        history.push("/dashboard");
+      }, 2100);
     }
-
-    console.log(errors);
   };
 
   return (
     <section className="login">
-      <form method="GET" onSubmit={handleSubmit(onSubmit)}>
+      <form method="POST" onSubmit={handleSubmit(onSubmit)}>
         <GoBack />
         <h2>Login</h2>
 
         <hr style={{ borderColor: "#abac7f" }} />
 
         <div className="loginForm">
-          <label>E-mail Id</label>
-          <input name="email" placeholder="E-mail Id" {...register("email")} />
-          <br />
+          <label htmlFor="email">E-mail Id</label>
+          <input
+            type="text"
+            name="email"
+            placeholder="E-mail Id"
+            {...register("email", { required: "⚠ Email is required!" })}
+          />
+          <p className="message">{errors.email && errors.email.message}</p>
 
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             placeholder="Password"
-            {...register("password")}
+            {...register("password", { required: "⚠ Password is required!" })}
           />
-          <br />
+          <p className="message">
+            {errors.password && errors.password.message}
+          </p>
 
           <input type="submit" value="Submit" />
-          <br />
-
-          {userdashboard ? <Redirect to="/dashboard" /> : ""}
+          <Link to="/createuser">
+            <p>
+              Don't have an account? <b>SignUp!</b>
+            </p>
+          </Link>
         </div>
-
-        <Link to="/createuser">
-          <p>
-            Don't have an account? <b>SignUp!</b>
-          </p>
-        </Link>
       </form>
+      <ToastContainer />
     </section>
   );
 }

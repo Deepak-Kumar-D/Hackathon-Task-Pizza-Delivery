@@ -15,7 +15,10 @@ export function UserDashboard() {
   };
 
   return (
-    <div>
+    <div className="dashboard">
+      <div className="select">
+        <h1>Select your me time Pizza!</h1>
+      </div>
       <section className="user">
         <div className="userDash">
           {CartData.map((data) => {
