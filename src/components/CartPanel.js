@@ -20,7 +20,6 @@ export function CartPanel({ show, setShow, item, setItem }) {
   };
 
   // Addition function to find the total price
-
   useEffect(() => {
     const sum = () => {
       let addition = 0;
@@ -75,8 +74,8 @@ export function CartPanel({ show, setShow, item, setItem }) {
           </div>
 
           {/* Total price of the cart */}
-          <div style={{ textAlign: "center", width: "100%" }}>
-            <h3>${total}</h3>
+          <div className="totalPrice">
+            <h3>${item.length === 0 ? 0 : total}</h3>
           </div>
 
           <hr style={{ width: "100%" }} />

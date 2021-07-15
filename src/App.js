@@ -1,47 +1,60 @@
 import "./style.css";
 import { Switch, Route } from "react-router-dom";
-import { ChooseLogin } from "./ChooseLogin.js";
-import { Header } from "./Header.js";
-import { LoginPage } from "./LoginPage.js";
-import { AdminLogin } from "./AdminLogin.js";
-import { CreateUser } from "./CreateUser.js";
-import { Footer } from "./Footer.js";
-import { UserDashboard } from "./UserDashboard.js";
+import { ChooseLogin } from "./components/ChooseLogin";
+import { Header } from "./components/Header";
+import { LoginPage } from "./components/LoginPage";
+import { AdminLogin } from "./components/AdminLogin.js";
+import { CreateUser } from "./components/CreateUser";
+import { Footer } from "./components/Footer";
+import { UserDashboard } from "./components/UserDashboard";
+import { Logout } from "./components/Logout";
+import { createContext, useState } from "react";
+
+export const showLoad = createContext(null);
 
 function App() {
+  const [loading, setLoading] = useState(false);
   return (
-    <div>
+    <showLoad.Provider value={{ loading, setLoading }}>
       <div>
-        <Header />
+        <div>
+          <Header />
+        </div>
+
+        <Switch>
+          {/* HomePage */}
+          <Route exact path="/">
+            <ChooseLogin />
+          </Route>
+
+          {/* Login Page */}
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+
+          {/* Create User Page */}
+          <Route path="/createuser">
+            <CreateUser />
+          </Route>
+
+          {/* Admin Login Page */}
+          <Route path="/adminlogin">
+            <AdminLogin />
+          </Route>
+
+          {/* User Dashboard */}
+          <UserDashboard path="/dashboard" />
+
+          {/* User Logout */}
+          <Route>
+            <Logout path="/logout" />
+          </Route>
+        </Switch>
+
+        {/* Footer */}
+        <Footer />
       </div>
-      <Switch>
-        {/* HomePage */}
-        <Route exact path="/">
-          <ChooseLogin />
-        </Route>
-
-        {/* Login Page */}
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-
-        {/* Create User Page */}
-        <Route path="/createuser">
-          <CreateUser />
-        </Route>
-
-        {/* Admin Login Page */}
-        <Route path="/adminlogin">
-          <AdminLogin />
-        </Route>
-
-        {/* <Route>User Dash Board</Route> */}
-        <UserDashboard path="/dashboard" />
-      </Switch>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </showLoad.Provider>
   );
 }
 

@@ -5,7 +5,6 @@ import { GoBack } from "./GoBack.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -14,7 +13,7 @@ const schema = yup.object().shape({
   address: yup.string().required(),
   password: yup
     .string()
-    .min(6, "⚠ Minimum 10 characters!")
+    .min(2, "⚠ Minimum 10 characters!")
     .max(15, "⚠ Maximum 10 characters!")
     .required(),
   confirmPassword: yup
@@ -61,15 +60,13 @@ export function CreateUser() {
     }
   };
 
-  useEffect(() => {}, []);
-
   return (
     <section className="createForm">
       <form method="POST" onSubmit={handleSubmit(onSubmit)}>
         <GoBack />
         <h2>New User</h2>
 
-        <hr style={{ borderColor: "#abac7f" }} />
+        <hr />
 
         <div className="loginForm">
           <label htmlFor="name">Name</label>
