@@ -55,7 +55,7 @@ export function CreateUser() {
       });
 
       setInterval(() => {
-        history.push("/login");
+        history.push("https://pizza-town-db.herokuapp.com/login");
       }, 3100);
     }
   };

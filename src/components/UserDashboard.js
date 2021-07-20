@@ -24,14 +24,17 @@ export function UserDashboard() {
     const Dash = async () => {
       setLoading(true);
       try {
-        const obj = await fetch("/dashboard", {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
+        const obj = await fetch(
+          "https://pizza-town-db.herokuapp.com/dashboard",
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
 
         if (obj.status !== 200) {
           const error = new Error(obj.error);
@@ -39,7 +42,7 @@ export function UserDashboard() {
         }
       } catch (err) {
         console.log(err);
-        history.push("/login");
+        history.push("https://pizza-town-db.herokuapp.com/login");
       }
       setLoading(false);
     };

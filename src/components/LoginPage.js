@@ -19,7 +19,7 @@ export function LoginPage() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const obj = await fetch("/login", {
+    const obj = await fetch("https://pizza-town-db.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export function LoginPage() {
         autoClose: 2000,
       });
       setTimeout(() => {
-        history.push("/dashboard");
+        history.push("https://pizza-town-db.herokuapp.com/dashboard");
         setLoading(false);
       }, 2100);
     }

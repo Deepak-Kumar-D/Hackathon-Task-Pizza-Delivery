@@ -11,7 +11,7 @@ export const Logout = () => {
     const logout = async () => {
       setLoading(true);
       try {
-        const obj = await fetch("/logout", {
+        const obj = await fetch("https://pizza-town-db.herokuapp.com/logout", {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -20,7 +20,9 @@ export const Logout = () => {
           credentials: "include",
         });
 
-        history.push("/login", { replace: true });
+        history.push("https://pizza-town-db.herokuapp.com/login", {
+          replace: true,
+        });
 
         if (obj.status !== 200) {
           const error = new Error(obj.error);
