@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export function ChooseLogin() {
   return (
-    <section className="main">
-      <div className="credentials">
+    <section className="mid-align main">
+      <div className="mid-align credentials">
         <p>Are you a User or an Admin?</p>
         <Link to="/login">
           <button className="btn">User Login</button>

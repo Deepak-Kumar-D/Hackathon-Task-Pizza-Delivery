@@ -10,17 +10,7 @@ body {
   background-color: #fefefe;
 }
 
-.titlebar,
-.logo,
-.main,
-.credentials,
-.login,
-.loginForm,
-.createForm,
-.select,
-.imageBg,
-.image,
-.footer,
+.mid-align,
 a {
   display: flex;
   justify-content: center;
@@ -422,9 +412,7 @@ input[type="submit"]:hover {
   padding: 0.5rem 0;
 }
 
-.cartRow h6,
-.cartRow p,
-.checkout h2 {
+.color-1 {
   color: #717744;
 }
 

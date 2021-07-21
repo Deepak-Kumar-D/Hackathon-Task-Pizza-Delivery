@@ -20,32 +20,30 @@ export function UserDashboard() {
     setItem(items);
   };
 
-  useEffect(() => {
-    const Dash = async () => {
-      setLoading(true);
-      try {
-        const obj = await fetch(
-          "https://pizza-town-db.herokuapp.com/dashboard",
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
+  const Dash = async () => {
+    setLoading(true);
+    try {
+      const obj = await fetch("https://pizza-town-db.herokuapp.com/dashboard", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
 
-        if (obj.status !== 200) {
-          const error = new Error(obj.error);
-          throw error;
-        }
-      } catch (err) {
-        console.log(err);
-        history.push("https://pizza-town-db.herokuapp.com/login");
+      if (obj.status !== 200) {
+        const error = new Error(obj.error);
+        throw error;
       }
-      setLoading(false);
-    };
+    } catch (err) {
+      console.log(err);
+      history.push("/login");
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
     Dash();
     setLoading();
   }, [history, setLoading]);
@@ -57,7 +55,7 @@ export function UserDashboard() {
         <RiLogoutBoxFill className="ham" />
       </Link>
 
-      <div className="select">
+      <div className="mid-align select">
         <h1>Select your me time Pizza!</h1>
       </div>
 
@@ -70,7 +68,7 @@ export function UserDashboard() {
             {CartData.map((data) => {
               return (
                 <div
-                  className="imageBg"
+                  className="mid-align imageBg"
                   key={data.id}
                   onClick={() => Add(data)}
                 >
@@ -78,7 +76,7 @@ export function UserDashboard() {
                     <span>₹ {data.price}</span>
                   </div>
                   {/* Image grid of the recipes on the Main Page */}
-                  <div className="image">
+                  <div className="mid-align image">
                     <h2>ADD to CART</h2>
                     <img src={data.src} alt="" />
                   </div>

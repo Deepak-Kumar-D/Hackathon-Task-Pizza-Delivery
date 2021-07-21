@@ -38,7 +38,7 @@ export function CartPanel({ show, setShow, item, setItem }) {
       <div className="cartPanel" style={{ display: show }}>
         <div className="checkout">
           <div>
-            <h2>Basket</h2>
+            <h2 className="color-1">Basket</h2>
             <button className="closebtn" onClick={() => setShow("none")}>
               X
             </button>
@@ -51,11 +51,11 @@ export function CartPanel({ show, setShow, item, setItem }) {
                 <div key={index}>
                   <div className="row">
                     <div className="cartRow">
-                      <h6>{cartItems.name}</h6>
+                      <h6 className="color-1">{cartItems.name}</h6>
                     </div>
 
                     <div className="cartRow">
-                      <p>${cartItems.price}</p>
+                      <p className="color-1">${cartItems.price}</p>
                     </div>
 
                     <div className="cartRow">

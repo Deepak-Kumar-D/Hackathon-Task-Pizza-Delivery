@@ -20,9 +20,8 @@ export const Logout = () => {
           credentials: "include",
         });
 
-        history.push("https://pizza-town-db.herokuapp.com/login", {
-          replace: true,
-        });
+        history.push("/login", { replace: true });
+        setLoading(false);
 
         if (obj.status !== 200) {
           const error = new Error(obj.error);
@@ -31,11 +30,14 @@ export const Logout = () => {
       } catch (err) {
         console.log(err);
       }
-      setLoading(false);
     };
     logout();
     setLoading();
   }, [history, setLoading]);
 
-  return <> {loading ? <GridLoader /> : "Logout"}</>;
+  return (
+    <div className="mid-align main">
+      <GridLoader />
+    </div>
+  );
 };

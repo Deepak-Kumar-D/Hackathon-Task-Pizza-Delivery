@@ -55,13 +55,13 @@ export function CreateUser() {
       });
 
       setInterval(() => {
-        history.push("https://pizza-town-db.herokuapp.com/login");
+        history.push("/login");
       }, 3100);
     }
   };
 
   return (
-    <section className="createForm">
+    <section className="mid-align createForm">
       <form method="POST" onSubmit={handleSubmit(onSubmit)}>
         <GoBack />
         <h2>New User</h2>

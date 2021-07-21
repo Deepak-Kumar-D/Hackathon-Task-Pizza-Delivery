@@ -46,14 +46,14 @@ export function LoginPage() {
         autoClose: 2000,
       });
       setTimeout(() => {
-        history.push("https://pizza-town-db.herokuapp.com/dashboard");
+        history.push("/dashboard");
         setLoading(false);
       }, 2100);
     }
   };
 
   return (
-    <section className="login">
+    <section className="mid-align login">
       {loading ? (
         <GridLoader />
       ) : (
@@ -63,7 +63,7 @@ export function LoginPage() {
 
           <hr />
 
-          <div className="loginForm">
+          <div className="mid-align loginForm">
             <label htmlFor="email">E-mail Id</label>
             <input
               type="text"
