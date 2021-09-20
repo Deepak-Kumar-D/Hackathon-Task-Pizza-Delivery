@@ -8,10 +8,10 @@
 
 .orders-table > .stock-table > tbody > tr > td > button {
   cursor: pointer;
-  width: 20%;
   border: 1px solid white;
-  background-color: #8a0f0f;
+  background-color: #007e4e;
   color: white;
+  padding: 0.5rem 1rem;
 }
 
 .orders-table > .stock-table > tbody > tr > td > button:hover {
@@ -20,5 +20,30 @@
 
 .orders-table > .stock-table > tbody > tr > td:nth-child(5) {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.orders-table > .stock-table > tbody > tr > td > input {
+  width: 2rem;
+  flex: 1;
+  text-align: center;
+  border: none;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+}
+
+.orders-table
+  > .stock-table
+  > tbody
+  > tr
+  > td
+  > input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+@media screen and (max-width: 600px) {
+  .orders-table .stock-table > tbody > tr > td > input {
+    width: 5rem;
+  }
 }

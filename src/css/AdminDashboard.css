@@ -67,3 +67,16 @@
   width: 100%;
   text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+  .orders-table {
+    display: flex;
+    justify-content: space-between;
+    overflow: scroll;
+    margin: 1rem;
+  }
+
+  .orders-table > table {
+    padding: 0;
+  }
+}

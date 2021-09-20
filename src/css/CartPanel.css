@@ -90,13 +90,13 @@
   text-align: left;
 }
 
-.checkout table > tbody > tr > td:nth-child(3) {
+.checkout table > tbody > tr > td:nth-child(4) {
   font-size: larger;
   cursor: pointer;
   transition: 0.1s ease-in;
 }
 
-.checkout table > tbody > tr > td:nth-child(3):hover {
+.checkout table > tbody > tr > td:nth-child(4):hover {
   color: red;
 }
 

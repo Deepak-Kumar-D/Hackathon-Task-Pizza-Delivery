@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { showLoad } from "../App";
 import { GridLoader } from "react-spinners";
-import jwt from "jsonwebtoken";
 import "../css/AdminDashboard.css";
 
 function AdminDashboard() {
@@ -13,47 +12,34 @@ function AdminDashboard() {
   let [pendingOrder, setPendingOrder] = useState(0);
 
   useEffect(() => {
-    const token = localStorage.getItem("admin-token");
+    const adminDashboard = async () => {
+      setLoading(true);
+      try {
+        const obj = await fetch("http://localhost:5000/admin-dashboard", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.getItem("admin-token"),
+          },
+          credentials: "include",
+        });
 
-    if (token) {
-      const user = jwt.decode(token);
+        const data = await obj.json();
 
-      if (!user) {
-        localStorage.removeItem("admin-token");
-        history.push("/");
-      } else {
-        const adminDashboard = async () => {
-          setLoading(true);
-          try {
-            const obj = await fetch("http://localhost:5000/admin-dashboard", {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                "x-access-token": localStorage.getItem("admin-token"),
-              },
-              credentials: "include",
-            });
+        setNav(data.type);
 
-            const data = await obj.json();
-
-            setNav(data.type);
-
-            if (obj.status !== 200) {
-              const error = new Error(obj.error);
-              throw error;
-            }
-          } catch (err) {
-            console.log(err);
-            history.push("/admin-login");
-          }
-          setLoading(false);
-        };
-
-        adminDashboard();
+        if (obj.status !== 200) {
+          const error = new Error(obj.error);
+          throw error;
+        }
+      } catch (err) {
+        console.log(err);
+        history.push("/admin-login");
       }
-    } else {
-      history.push("/");
-    }
+      setLoading(false);
+    };
+
+    adminDashboard();
   }, [setLoading, setNav, history]);
 
   const orderList = async () => {

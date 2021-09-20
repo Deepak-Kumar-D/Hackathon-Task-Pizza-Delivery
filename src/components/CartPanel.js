@@ -46,6 +46,7 @@ export function CartPanel() {
                 <tr>
                   <th>Item</th>
                   <th>Price</th>
+                  <th>Quantity</th>
                   <th>Remove</th>
                 </tr>
               </thead>
@@ -55,6 +56,7 @@ export function CartPanel() {
                     <tr key={index}>
                       <td>{cartItems.name}</td>
                       <td>${cartItems.price}</td>
+                      <td>{cartItems.quantity}</td>
                       <td onClick={() => removeItem(index)}>
                         <IoBagRemoveSharp />
                       </td>

@@ -72,6 +72,7 @@ function Checkout() {
             items: item,
           };
           await axios.post("http://localhost:5000/add-order", orderData);
+          await axios.post("http://localhost:5000/remove-quantity", orderData);
 
           setItem([]);
           setTotal(0);

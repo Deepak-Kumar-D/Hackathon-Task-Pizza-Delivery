@@ -2,11 +2,28 @@ import React, { useState, useEffect, useContext } from "react";
 import { showLoad } from "../App";
 import { GridLoader } from "react-spinners";
 import "../css/AdminProducts.css";
+import axios from "axios";
 
 function AdminProducts() {
   const { loading, setLoading, setNav } = useContext(showLoad);
   const [product, setProduct] = useState([]);
+  const [qty, setQty] = useState(parseInt());
   let count = 0;
+
+  const Increase = async (id, name, ele) => {
+    if (ele < qty) {
+      const data = {};
+      data.id = id;
+      data.qty = qty;
+
+      await axios.post("http://localhost:5000/add-quantity", data);
+      setQty();
+
+      alert(`${qty} quantities of ${name} has been added.`);
+    } else {
+      alert(`Add more quantities to update the stock.`);
+    }
+  };
 
   useEffect(() => {
     const productList = async () => {
@@ -65,9 +82,18 @@ function AdminProducts() {
                       <td>{list.src}</td>
                       <td>{list.price}</td>
                       <td>
-                        <button>-</button>
-                        {list.quantity}
-                        <button>+</button>
+                        <input
+                          type="number"
+                          onChange={(e) => setQty(e.target.value)}
+                          defaultValue={list.quantity}
+                        />
+                        <button
+                          onClick={() =>
+                            Increase(list._id, list.name, list.quantity)
+                          }
+                        >
+                          Add
+                        </button>
                       </td>
                     </tr>
                   );

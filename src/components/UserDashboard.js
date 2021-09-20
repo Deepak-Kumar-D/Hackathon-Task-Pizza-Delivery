@@ -18,6 +18,7 @@ export function UserDashboard() {
   const [user, setUser] = useState([]);
   const [check, setCheck] = useState(false);
   const history = useHistory();
+  const [newqty, setNewqty] = useState(1);
 
   const Cart = async () => {
     setLoading(true);
@@ -44,10 +45,22 @@ export function UserDashboard() {
     setLoading(false);
   };
 
+  const productQuantity = () => {
+    const quantity = prompt("Set the required quanity:");
+    setNewqty(quantity);
+  };
+
   const Add = async (data) => {
+    const quantity = prompt("Set the required quanity:");
     const newItem = {};
+    newItem.productId = data._id;
     newItem.name = data.name;
     newItem.price = data.price;
+    if (quantity === "") {
+      newItem.quantity = 1;
+    } else {
+      newItem.quantity = quantity;
+    }
 
     const items = [...item];
     items.push(newItem);
@@ -206,6 +219,7 @@ export function UserDashboard() {
               })}
             </div>
           )}
+          <button onClick={productQuantity}>Quantity: {newqty}</button>
         </section>
 
         {/* Cart Button */}
