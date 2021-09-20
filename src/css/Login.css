@@ -1,0 +1,115 @@
+.login {
+  margin: auto;
+  padding: 1rem;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  padding: 2rem;
+  width: 30rem;
+  text-align: center;
+  border-radius: 0.2rem;
+  background-color: #416801;
+  box-shadow: 1px 2px 20px 5px gray;
+}
+
+form h3 {
+  padding: 1rem 0;
+  color: #fefefe;
+}
+
+a {
+  float: right;
+  text-decoration: none;
+  color: #fefefe;
+  letter-spacing: normal;
+}
+
+.loginForm label {
+  color: #fefefe;
+  font-size: medium;
+  font-weight: 400;
+  padding: 0.5rem 0;
+  text-align: left;
+  width: 100%;
+}
+
+.loginForm input {
+  color: #373d20;
+  outline: none;
+  padding: 0.5rem 0.3rem;
+  font-size: 0.8rem;
+  border: 0.05rem solid #abac7f;
+  border-radius: 0.2rem;
+  outline-color: #717744;
+  width: 100%;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  margin-bottom: 0.5rem;
+}
+
+input[type="submit"] {
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #373d20;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: #fefefe;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 0.05rem;
+  transition: 0.25s;
+}
+
+.btn {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.05rem;
+  width: 20rem;
+  padding: 1rem;
+  color: #373d20;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: #fefefe;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn:hover,
+input[type="submit"]:hover {
+  background-color: #202701;
+  color: #fefefe;
+  letter-spacing: 0.2rem;
+}
+
+.message {
+  width: 100%;
+  text-align: left;
+  color: rgb(220, 197, 20);
+  font-weight: 400;
+}
+
+.loginForm p {
+  font-weight: 400;
+}
+
+@media screen and (max-width: 600px) {
+  form {
+    width: 80%;
+    font-size: 80%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

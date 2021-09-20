@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import "../css/GoBack.css";
 
 export function GoBack() {
   const back = useHistory();

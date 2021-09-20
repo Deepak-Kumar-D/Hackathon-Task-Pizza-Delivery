@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { GoBack } from "./GoBack.js";
 import { Link, useHistory } from "react-router-dom";
+import "../css/Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GridLoader } from "react-spinners";
@@ -19,7 +20,7 @@ export function AdminLogin() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const obj = await fetch("/login", {
+    const obj = await fetch("http://localhost:5000/admin-login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,32 +35,33 @@ export function AdminLogin() {
 
     const login = await obj.json();
 
-    if (obj.status === 400 || !login) {
+    if (obj.status === 400) {
       setLoading(false);
       toast.error("Invalid Credentials!", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1000,
       });
     } else {
+      localStorage.setItem("admin-token", login.admin);
       toast.success("Login Successful!", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1000,
       });
       setTimeout(() => {
-        history.push("/dashboard");
+        history.push("/admin-dashboard");
         setLoading(false);
-      }, 2100);
+      }, 1100);
     }
   };
 
   return (
-    <section className="login">
+    <section className="load login">
       {loading ? (
         <GridLoader />
       ) : (
         <form method="POST" onSubmit={handleSubmit(onSubmit)}>
           <GoBack />
-          <h2>Login</h2>
+          <h3>Admin Login</h3>
 
           <hr />
 
@@ -84,8 +86,9 @@ export function AdminLogin() {
               {errors.password && errors.password.message}
             </p>
 
-            <input type="submit" value="Submit" />
-            <Link to="/createuser">
+            <input type="submit" value="Login" />
+            <br />
+            <Link to="/create-admin">
               <p>
                 Don't have an account? <b>SignUp!</b>
               </p>

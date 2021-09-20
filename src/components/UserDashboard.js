@@ -1,113 +1,245 @@
-import { CartData } from "./CartData.js";
+import "../css/UserDashboard.css";
 import { FaShoppingCart } from "react-icons/fa";
-import { RiLogoutBoxFill } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, createContext } from "react";
 import { CartPanel } from "./CartPanel.js";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { GridLoader } from "react-spinners";
 import { showLoad } from "../App";
-import { useContext } from "react";
+import jwt from "jsonwebtoken";
+
+export const orderCheckout = createContext(null);
 
 export function UserDashboard() {
-  const { loading, setLoading } = useContext(showLoad);
+  const { loading, setLoading, setNav } = useContext(showLoad);
+  const [cartData, setCartData] = useState([]);
   const [item, setItem] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [qty, setQty] = useState(0);
   const [show, setShow] = useState("none");
+  const [user, setUser] = useState([]);
+  const [check, setCheck] = useState(false);
   const history = useHistory();
 
-  const Add = (data) => {
-    const items = [...item];
-    items.push(data);
-    setItem(items);
-  };
-
-  const Dash = async () => {
+  const Cart = async () => {
     setLoading(true);
-    try {
-      const obj = await fetch("https://pizza-town-db.herokuapp.com/dashboard", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+    const obj = await fetch("http://localhost:5000/get-cart", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      credentials: "include",
+    });
 
-      if (obj.status !== 200) {
-        const error = new Error(obj.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-      history.push("/login");
+    const data = await obj.json();
+
+    if (data.total_quantity === 0) {
+      setCheck(true);
+    } else {
+      setItem(data.items);
+      setTotal(data.total_price);
+      setQty(data.total_quantity);
+      setCheck(true);
     }
+
     setLoading(false);
   };
 
+  const Add = async (data) => {
+    const newItem = {};
+    newItem.name = data.name;
+    newItem.price = data.price;
+
+    const items = [...item];
+    items.push(newItem);
+    setItem(items);
+
+    alert(`${data.name} added to the cart!`);
+  };
+
+  // Addition function to find the total price
   useEffect(() => {
-    Dash();
-    setLoading();
-  }, [history, setLoading]);
+    const sum = () => {
+      let addition = 0;
+      for (let i = 0; i < item.length; i++) {
+        addition += item[i].price;
+      }
+
+      setTotal(addition);
+      setQty(item.length);
+    };
+    sum();
+  }, [item, qty]);
+
+  useEffect(() => {
+    if (!check) {
+      Cart();
+    }
+  });
+
+  useEffect(() => {
+    const addCart = async () => {
+      await fetch("http://localhost:5000/add-cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user._id,
+          items: item,
+          total: total,
+          qty: qty,
+        }),
+      });
+    };
+
+    addCart();
+  }, [user, item, qty, total]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const user = jwt.decode(token);
+
+      if (!user) {
+        localStorage.removeItem("token");
+        history.push("/login");
+      } else {
+        const dashboard = async () => {
+          setLoading(true);
+          try {
+            const obj = await fetch("http://localhost:5000/dashboard", {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                "x-access-token": localStorage.getItem("token"),
+              },
+              credentials: "include",
+            });
+
+            const data = await obj.json();
+
+            setUser(data);
+
+            setNav(data.type);
+
+            if (obj.status !== 200) {
+              const error = new Error(obj.error);
+              throw error;
+            }
+          } catch (err) {
+            console.log(err);
+            history.push("/login");
+          }
+          setLoading(false);
+        };
+
+        const Products = async () => {
+          setLoading(true);
+          try {
+            const obj = await fetch("http://localhost:5000/products", {
+              method: "GET",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              credentials: "include",
+            });
+
+            const data = await obj.json();
+            setCartData(data);
+
+            if (obj.status !== 200) {
+              const error = new Error(obj.error);
+              throw error;
+            }
+          } catch (err) {
+            console.log(err);
+            history.push("/login");
+          }
+          setLoading(false);
+        };
+
+        dashboard();
+        Products();
+      }
+    } else {
+      history.push("/login");
+    }
+  }, [setLoading, setNav, history]);
 
   return (
-    <div className="dashboard">
-      {/* Logout Button */}
-      <Link to="/logout">
-        <RiLogoutBoxFill className="ham" />
-      </Link>
+    <orderCheckout.Provider
+      value={{
+        show,
+        setShow,
+        item,
+        setItem,
+        total,
+        setTotal,
+        qty,
+        setQty,
+        user,
+        Cart,
+      }}
+    >
+      <div className="dashboard">
+        <div className="mid-align select">
+          <h1>Select your me time Pizza!</h1>
+        </div>
 
-      <div className="mid-align select">
-        <h1>Select your me time Pizza!</h1>
+        {/* Dashboard */}
+        <section className="user">
+          {loading ? (
+            <GridLoader />
+          ) : (
+            <div className="userDash">
+              {cartData.map((data) => {
+                return (
+                  <div
+                    className="mid-align imageBg"
+                    key={data._id}
+                    onClick={() => Add(data)}
+                  >
+                    <div className="priceTag">
+                      <span>₹ {data.price}</span>
+                    </div>
+
+                    {/* Image grid of the recipes on the Main Page */}
+                    <div className="mid-align image">
+                      <h2>ADD to CART</h2>
+                      <img src={data.src} alt="" />
+                    </div>
+
+                    {/* Recipe name under Image on the Main Page */}
+                    <div>
+                      <p>{data.name}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        {/* Cart Button */}
+        <div
+          className="btnCart"
+          style={{ pointerEvents: item.length > 0 ? "auto" : "none" }}
+          onClick={() => {
+            item.length > 0 ? setShow("block") : setShow("none");
+          }}
+        >
+          <span>{item.length}</span>
+          <button>
+            <FaShoppingCart />
+          </button>
+        </div>
+
+        {/* Panel for cart */}
+        <CartPanel />
       </div>
-
-      {/* Dashboard */}
-      <section className="user">
-        {loading ? (
-          <GridLoader />
-        ) : (
-          <div className="userDash">
-            {CartData.map((data) => {
-              return (
-                <div
-                  className="mid-align imageBg"
-                  key={data.id}
-                  onClick={() => Add(data)}
-                >
-                  <div className="priceTag">
-                    <span>₹ {data.price}</span>
-                  </div>
-                  {/* Image grid of the recipes on the Main Page */}
-                  <div className="mid-align image">
-                    <h2>ADD to CART</h2>
-                    <img src={data.src} alt="" />
-                  </div>
-
-                  {/* Recipe name under Image on the Main Page */}
-                  <div>
-                    <p>{data.name}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </section>
-
-      {/* Cart Button */}
-      <div
-        className="btnCart"
-        style={{ pointerEvents: item.length > 0 ? "auto" : "none" }}
-        onClick={() => {
-          item.length > 0 ? setShow("block") : setShow("none");
-        }}
-      >
-        <span>{item.length}</span>
-        <button>
-          <FaShoppingCart />
-        </button>
-      </div>
-
-      {/* Panel for cart */}
-      <CartPanel setItem={setItem} show={show} setShow={setShow} item={item} />
-    </div>
+    </orderCheckout.Provider>
   );
 }

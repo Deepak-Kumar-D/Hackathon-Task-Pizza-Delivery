@@ -22,7 +22,7 @@ const schema = yup.object().shape({
     .required(),
 });
 
-export function CreateUser() {
+export function CreateAdmin() {
   const { loading, setLoading } = useContext(showLoad);
   const history = useHistory();
 
@@ -34,7 +34,7 @@ export function CreateUser() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const obj = await fetch("http://localhost:5000/register", {
+    const obj = await fetch("http://localhost:5000/admin-register", {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",
@@ -48,9 +48,9 @@ export function CreateUser() {
       }),
     });
 
-    const reg = await obj.json();
+    // const reg = await obj.json();
 
-    if (reg) {
+    if (obj.status !== 422) {
       toast.success(
         "Verification email sent!\nPlease check your email to verify!",
         {
@@ -61,9 +61,9 @@ export function CreateUser() {
       setLoading(false);
 
       setInterval(() => {
-        history.push("/login");
+        history.push("/admin-login");
       }, 3100);
-    } else if (obj.status === 422) {
+    } else {
       setLoading(false);
       toast.error("Email-id already exist!", {
         position: "top-right",
@@ -80,7 +80,7 @@ export function CreateUser() {
       ) : (
         <form method="POST" onSubmit={handleSubmit(onSubmit)}>
           <GoBack />
-          <h3>New User</h3>
+          <h3>New Admin</h3>
 
           <hr />
 

@@ -1,0 +1,27 @@
+.orders-table > table > thead > tr > th:nth-child(3) {
+  text-align: left;
+}
+
+.orders-table > table > tbody > tr > td:nth-child(3) {
+  text-align: left;
+}
+
+.Order.Placed {
+  background-color: #ff4500;
+}
+
+.Order.Accpeted {
+  background-color: #8db500;
+}
+
+.Order.is.being.prepared {
+  background-color: #007e4e;
+}
+
+.On.the.way {
+  background-color: #044ba7;
+}
+
+.Order.Delivered {
+  background-color: #07a307;
+}

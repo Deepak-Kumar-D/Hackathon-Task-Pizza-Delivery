@@ -1,0 +1,24 @@
+.orders-table > .stock-table > thead {
+  background-color: #113047;
+}
+
+.orders-table > .stock-table > tbody {
+  background-color: #3485c4;
+}
+
+.orders-table > .stock-table > tbody > tr > td > button {
+  cursor: pointer;
+  width: 20%;
+  border: 1px solid white;
+  background-color: #8a0f0f;
+  color: white;
+}
+
+.orders-table > .stock-table > tbody > tr > td > button:hover {
+  background-color: #4d0808;
+}
+
+.orders-table > .stock-table > tbody > tr > td:nth-child(5) {
+  display: flex;
+  justify-content: space-between;
+}

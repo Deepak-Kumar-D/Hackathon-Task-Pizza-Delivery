@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import "../css/CartPanel.css";
 import { Card } from "react-bootstrap";
+import Checkout from "./Checkout";
+import { FaShoppingBasket } from "react-icons/fa";
+import { IoBagRemoveSharp } from "react-icons/io5";
+import { orderCheckout } from "./UserDashboard";
+import { useContext } from "react";
 
-export function CartPanel({ show, setShow, item, setItem }) {
-  const [total, setTotal] = useState(0);
-
+export function CartPanel() {
+  const { show, setShow, item, setItem, total } = useContext(orderCheckout);
   // Removing an item from the cart and refreshing it at the same time.
   const removeItem = (index) => {
     item.splice(index, 1);
@@ -13,76 +17,65 @@ export function CartPanel({ show, setShow, item, setItem }) {
     });
 
     if (item.length === 0) {
+      setItem(updatedItems);
       setShow("none");
     } else {
       setItem(updatedItems);
     }
   };
 
-  // Addition function to find the total price
-  useEffect(() => {
-    const sum = () => {
-      let addition = 0;
-      for (let i = 0; i < item.length; i++) {
-        addition += item[i].price;
-      }
-
-      setTotal(addition);
-    };
-    sum();
-  }, [item]);
-
   return (
     // Cart panel which is displayed on click of the cart button if there are items in it.
     <Card>
       <div className="cartPanel" style={{ display: show }}>
         <div className="checkout">
-          <div>
-            <h2 className="color-1">Basket</h2>
+          <div className="header">
             <button className="closebtn" onClick={() => setShow("none")}>
               X
             </button>
+            <h3>
+              <FaShoppingBasket />
+              BASKET
+            </h3>
           </div>
           <hr style={{ width: "100%" }} />
 
           <div style={{ width: "100%" }}>
-            {item.map((cartItems, index) => {
-              return (
-                <div key={index}>
-                  <div className="row">
-                    <div className="cartRow">
-                      <h6 className="color-1">{cartItems.name}</h6>
-                    </div>
-
-                    <div className="cartRow">
-                      <p className="color-1">${cartItems.price}</p>
-                    </div>
-
-                    <div className="cartRow">
-                      <button
-                        className="btnRemove"
-                        onClick={() => removeItem(index)}
-                      >
-                        X
-                      </button>
-                    </div>
-                  </div>
-                  <hr />
-                </div>
-              );
-            })}
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Price</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody className="cartDetail">
+                {item.map((cartItems, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{cartItems.name}</td>
+                      <td>${cartItems.price}</td>
+                      <td onClick={() => removeItem(index)}>
+                        <IoBagRemoveSharp />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
 
           {/* Total price of the cart */}
           <div className="totalPrice">
-            <h3>${item.length === 0 ? 0 : total}</h3>
-          </div>
+            <h3>
+              Total:
+              <span>${item.length === 0 ? 0 : total}</span>
+            </h3>
 
-          <hr style={{ width: "100%" }} />
+            <hr style={{ width: "100%" }} />
 
-          {/* Checkout button */}
-          <div>
-            <button className="btn">Checkout</button>
+            {/* Checkout button */}
+            <Checkout />
           </div>
         </div>
       </div>

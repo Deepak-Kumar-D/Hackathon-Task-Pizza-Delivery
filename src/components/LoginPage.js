@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { GoBack } from "./GoBack.js";
 import { Link, useHistory } from "react-router-dom";
+import "../css/Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GridLoader } from "react-spinners";
@@ -19,7 +20,7 @@ export function LoginPage() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const obj = await fetch("https://pizza-town-db.herokuapp.com/login", {
+    const obj = await fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,36 +35,37 @@ export function LoginPage() {
 
     const login = await obj.json();
 
-    if (obj.status === 400 || !login) {
+    if (obj.status === 400) {
       setLoading(false);
       toast.error("Invalid Credentials!", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1000,
       });
     } else {
+      localStorage.setItem("token", login.user);
       toast.success("Login Successful!", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1000,
       });
       setTimeout(() => {
         history.push("/dashboard");
         setLoading(false);
-      }, 2100);
+      }, 1100);
     }
   };
 
   return (
-    <section className="mid-align login">
+    <section className="load login">
       {loading ? (
         <GridLoader />
       ) : (
         <form method="POST" onSubmit={handleSubmit(onSubmit)}>
           <GoBack />
-          <h2>Login</h2>
+          <h3>Login</h3>
 
           <hr />
 
-          <div className="mid-align loginForm">
+          <div className="loginForm">
             <label htmlFor="email">E-mail Id</label>
             <input
               type="text"
@@ -84,7 +86,8 @@ export function LoginPage() {
               {errors.password && errors.password.message}
             </p>
 
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Login" />
+            <br />
             <Link to="/createuser">
               <p>
                 Don't have an account? <b>SignUp!</b>

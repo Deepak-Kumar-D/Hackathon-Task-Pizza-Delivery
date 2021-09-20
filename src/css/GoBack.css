@@ -1,0 +1,13 @@
+.back {
+  position: absolute;
+}
+
+.back > p {
+  color: #fefefe;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.back > p:hover {
+  color: #abac7f;
+}
