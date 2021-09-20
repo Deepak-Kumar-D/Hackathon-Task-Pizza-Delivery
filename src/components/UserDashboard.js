@@ -5,7 +5,6 @@ import { CartPanel } from "./CartPanel.js";
 import { useHistory } from "react-router-dom";
 import { GridLoader } from "react-spinners";
 import { showLoad } from "../App";
-import jwt from "jsonwebtoken";
 
 export const orderCheckout = createContext(null);
 
@@ -97,76 +96,62 @@ export function UserDashboard() {
   }, [user, item, qty, total]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const dashboard = async () => {
+      setLoading(true);
+      try {
+        const obj = await fetch("http://localhost:5000/dashboard", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.getItem("token"),
+          },
+          credentials: "include",
+        });
 
-    if (token) {
-      const user = jwt.decode(token);
+        const data = await obj.json();
 
-      if (!user) {
-        localStorage.removeItem("token");
+        setUser(data);
+        setNav(data.type);
+
+        if (obj.status !== 200) {
+          const error = new Error(obj.error);
+          throw error;
+        }
+      } catch (err) {
+        console.log(err);
         history.push("/login");
-      } else {
-        const dashboard = async () => {
-          setLoading(true);
-          try {
-            const obj = await fetch("http://localhost:5000/dashboard", {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                "x-access-token": localStorage.getItem("token"),
-              },
-              credentials: "include",
-            });
-
-            const data = await obj.json();
-
-            setUser(data);
-
-            setNav(data.type);
-
-            if (obj.status !== 200) {
-              const error = new Error(obj.error);
-              throw error;
-            }
-          } catch (err) {
-            console.log(err);
-            history.push("/login");
-          }
-          setLoading(false);
-        };
-
-        const Products = async () => {
-          setLoading(true);
-          try {
-            const obj = await fetch("http://localhost:5000/products", {
-              method: "GET",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-            });
-
-            const data = await obj.json();
-            setCartData(data);
-
-            if (obj.status !== 200) {
-              const error = new Error(obj.error);
-              throw error;
-            }
-          } catch (err) {
-            console.log(err);
-            history.push("/login");
-          }
-          setLoading(false);
-        };
-
-        dashboard();
-        Products();
       }
-    } else {
-      history.push("/login");
-    }
+      setLoading(false);
+    };
+
+    const Products = async () => {
+      setLoading(true);
+      try {
+        const obj = await fetch("http://localhost:5000/user-products", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.getItem("token"),
+          },
+          credentials: "include",
+        });
+
+        const data = await obj.json();
+        setCartData(data.products);
+
+        if (obj.status !== 200) {
+          const error = new Error(obj.error);
+          throw error;
+        }
+      } catch (err) {
+        console.log(err);
+        history.push("/login");
+      }
+      setLoading(false);
+    };
+
+    dashboard();
+    Products();
   }, [setLoading, setNav, history]);
 
   return (
