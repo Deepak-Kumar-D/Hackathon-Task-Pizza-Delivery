@@ -93,6 +93,10 @@ export function LoginPage() {
                 Don't have an account? <b>SignUp!</b>
               </p>
             </Link>
+            <br />
+            <Link to="/forgot-password">
+              <p>Forgot Password?</p>
+            </Link>
           </div>
         </form>
       )}

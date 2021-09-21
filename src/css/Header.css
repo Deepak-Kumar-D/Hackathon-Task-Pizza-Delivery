@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #202701;
+  background-color: #15160d;
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -11,14 +11,14 @@
 }
 
 .title h1 {
-  color: #abac7f;
+  color: #777908;
   font-size: 1.5rem;
   transition: 0.25s;
 }
 
 .logo {
   margin: 0 0.3rem;
-  border: 0.15rem solid #abac7f;
+  border: 0.15rem solid #777908;
   border-radius: 50%;
   padding: 0.1rem;
 }
@@ -44,7 +44,9 @@
 }
 
 .navbar > ul > li > a {
-  color: #abac7f;
+  color: #777908;
+  text-shadow: none;
+  font-size: 1rem;
 }
 
 .navbar > ul > li > a:hover {
@@ -67,7 +69,7 @@
   .menu {
     display: flex;
     align-items: center;
-    color: #abac7f;
+    color: #777908;
     cursor: pointer;
   }
 
@@ -90,13 +92,13 @@
     width: 100%;
     flex-direction: column;
     top: 4.5rem;
-    background-color: #373d20;
+    background-color: #15160d;
     z-index: 9;
   }
 
   .navbar > ul > li {
     padding: 1rem;
-    border-top: 1px solid #abac7f;
+    border-top: 1px solid #777908;
     width: 100%;
   }
 

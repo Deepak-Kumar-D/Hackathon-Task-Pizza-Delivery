@@ -18,7 +18,7 @@
 
 .select h1 {
   font-size: medium;
-  color: #373d20;
+  color: #777908;
   font-weight: 500;
   text-align: center;
 }
@@ -112,12 +112,13 @@
   position: fixed;
   bottom: 2rem;
   right: 1rem;
+  opacity: 0.9;
 }
 
 .btnCart button {
   font-size: 1.5rem;
   background-color: #abac7f;
-  color: #373d20;
+  color: #15160d;
   border: 1px solid white;
   border-radius: 50%;
   padding: 0.8rem;
@@ -129,7 +130,7 @@
 }
 
 .btnCart:hover button {
-  background-color: #373d20;
+  background-color: #15160d;
   color: #abac7f;
 }
 
@@ -139,7 +140,7 @@
   padding: 0.3rem 0.7rem;
   top: 1.2rem;
   right: 2.1rem;
-  background-color: #373d20;
+  background-color: #15160d;
   color: #abac7f;
   position: absolute;
   border: 1px solid white;
@@ -150,7 +151,7 @@
 
 .btnCart:hover span {
   background-color: #abac7f;
-  color: #373d20;
+  color: #15160d;
 }
 
 @media screen and (max-width: 600px) {

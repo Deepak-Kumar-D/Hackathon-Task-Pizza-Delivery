@@ -1,0 +1,13 @@
+.image-slide {
+  margin-top: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px 0 #4b4b4b;
+  border-radius: 5px;
+}
+
+.image-slide img {
+  width: 100%;
+}

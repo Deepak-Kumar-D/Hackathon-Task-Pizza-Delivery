@@ -5,6 +5,7 @@ import { CartPanel } from "./CartPanel.js";
 import { useHistory } from "react-router-dom";
 import { GridLoader } from "react-spinners";
 import { showLoad } from "../App";
+import ImageCarousel from "./ImageCarousel";
 
 export const orderCheckout = createContext(null);
 
@@ -18,7 +19,6 @@ export function UserDashboard() {
   const [user, setUser] = useState([]);
   const [check, setCheck] = useState(false);
   const history = useHistory();
-  const [newqty, setNewqty] = useState(1);
 
   const Cart = async () => {
     setLoading(true);
@@ -43,11 +43,6 @@ export function UserDashboard() {
     }
 
     setLoading(false);
-  };
-
-  const productQuantity = () => {
-    const quantity = prompt("Set the required quanity:");
-    setNewqty(quantity);
   };
 
   const Add = async (data) => {
@@ -183,6 +178,7 @@ export function UserDashboard() {
       }}
     >
       <div className="dashboard">
+        <ImageCarousel />
         <div className="mid-align select">
           <h1>Select your me time Pizza!</h1>
         </div>
@@ -219,7 +215,6 @@ export function UserDashboard() {
               })}
             </div>
           )}
-          <button onClick={productQuantity}>Quantity: {newqty}</button>
         </section>
 
         {/* Cart Button */}

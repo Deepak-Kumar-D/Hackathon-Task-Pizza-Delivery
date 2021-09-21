@@ -17,6 +17,8 @@ import AdminVerify from "./components/AdminVerify";
 import AdminProducts from "./components/AdminProducts";
 import AdminOrders from "./components/AdminOrders";
 import Orders from "./components/Orders";
+import ForgotPassword from "./components/ForgotPassword.js";
+import ResetPassword from "./components/ResetPassword";
 
 // https://pizza-town-db.herokuapp.com/
 
@@ -101,6 +103,16 @@ function App() {
           {/* Admin Logout */}
           <Route path="/admin-logout">
             <AdminLogout />
+          </Route>
+
+          {/* Reset Password */}
+          <Route path="/forgot-password">
+            <ForgotPassword />
+          </Route>
+
+          {/* Reset Password */}
+          <Route path="/reset-password/:token">
+            <ResetPassword />
           </Route>
         </Switch>
       </showLoad.Provider>

@@ -13,8 +13,8 @@ import { showLoad } from "../App";
 const schema = yup.object().shape({
   password: yup
     .string()
-    .min(2, "⚠ Minimum 10 characters!")
-    .max(15, "⚠ Maximum 10 characters!")
+    .min(3, "⚠ Minimum 3 characters!")
+    .max(15, "⚠ Maximum 15 characters!")
     .required(),
   confirmPassword: yup
     .string()
@@ -47,8 +47,6 @@ export function CreateAdmin() {
         password: data.password,
       }),
     });
-
-    // const reg = await obj.json();
 
     if (obj.status !== 422) {
       toast.success(

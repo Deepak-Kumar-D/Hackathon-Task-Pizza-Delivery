@@ -9,5 +9,5 @@
 }
 
 .back > p:hover {
-  color: #abac7f;
+  text-decoration: underline;
 }
