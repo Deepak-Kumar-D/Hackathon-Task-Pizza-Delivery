@@ -24,7 +24,7 @@ body {
   width: 100%;
   object-fit: cover;
   z-index: -9999;
-  opacity: 0.3;
+  opacity: 0.12;
 }
 
 .load {
@@ -40,19 +40,6 @@ a {
   align-items: center;
 }
 
-.ham {
-  position: absolute;
-  color: #abac7f;
-  top: 1.8rem;
-  left: 1rem;
-  font-size: 2.5rem;
-  transition: 0.5s;
-}
-
-.ham:hover {
-  color: #717744;
-}
-
 .logout {
   display: flex;
 }
@@ -62,11 +49,11 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #abac7f;
+  background-color: #d1b9b9;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #373d20;
+  background-color: #990000;
 }
 
 /* 202701,abac7f,717744 */

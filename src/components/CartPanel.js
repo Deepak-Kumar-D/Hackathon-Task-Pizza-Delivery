@@ -8,6 +8,7 @@ import { useContext } from "react";
 
 export function CartPanel() {
   const { show, setShow, item, setItem, total } = useContext(orderCheckout);
+
   // Removing an item from the cart and refreshing it at the same time.
   const removeItem = (index) => {
     item.splice(index, 1);
@@ -50,20 +51,38 @@ export function CartPanel() {
                   <th>Remove</th>
                 </tr>
               </thead>
-              <tbody className="cartDetail">
-                {item.map((cartItems, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{cartItems.name}</td>
+
+              {item.map((cartItems, index) => {
+                return (
+                  <tbody key={index} className="cartDetail">
+                    <tr>
+                      <td>
+                        {cartItems.name}
+                        <br />
+                        <span>
+                          {cartItems.extras.base}, {cartItems.extras.sauce},
+                          {" " + cartItems.extras.cheese},
+                          {" " +
+                            cartItems.extras.veggies
+                              .map((item) => item)
+                              .join(", ")}
+                          ,
+                          {" " +
+                            cartItems.extras.meat
+                              .map((item) => item)
+                              .join(", ")}
+                          .
+                        </span>
+                      </td>
                       <td>${cartItems.price}</td>
                       <td>{cartItems.quantity}</td>
                       <td onClick={() => removeItem(index)}>
                         <IoBagRemoveSharp />
                       </td>
                     </tr>
-                  );
-                })}
-              </tbody>
+                  </tbody>
+                );
+              })}
             </table>
           </div>
 

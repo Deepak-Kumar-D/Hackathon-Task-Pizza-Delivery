@@ -6,18 +6,26 @@ import { useHistory } from "react-router-dom";
 import { GridLoader } from "react-spinners";
 import { showLoad } from "../App";
 import ImageCarousel from "./ImageCarousel";
+import Extras from "./Extras";
 
 export const orderCheckout = createContext(null);
 
 export function UserDashboard() {
   const { loading, setLoading, setNav } = useContext(showLoad);
   const [cartData, setCartData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const [item, setItem] = useState([]);
   const [total, setTotal] = useState(0);
   const [qty, setQty] = useState(0);
   const [show, setShow] = useState("none");
   const [user, setUser] = useState([]);
   const [check, setCheck] = useState(false);
+  const [newbase, setBase] = useState(null);
+  const [newsauce, setSauce] = useState();
+  const [newcheese, setCheese] = useState();
+  const [newveggies, setVeggies] = useState([]);
+  const [newmeat, setMeat] = useState([]);
+  let [newItem, setNewItem] = useState();
   const history = useHistory();
 
   const Cart = async () => {
@@ -45,23 +53,51 @@ export function UserDashboard() {
     setLoading(false);
   };
 
-  const Add = async (data) => {
-    const quantity = prompt("Set the required quanity:");
-    const newItem = {};
-    newItem.productId = data._id;
-    newItem.name = data.name;
-    newItem.price = data.price;
-    if (quantity === "") {
-      newItem.quantity = 1;
-    } else {
-      newItem.quantity = quantity;
-    }
+  const clearExtras = () => {
+    setBase();
+    setSauce();
+    setCheese();
+    setVeggies([]);
+    setMeat([]);
+  };
+
+  const addExtras = () => {
+    const extraItems = {};
+    extraItems.base = newbase;
+    extraItems.sauce = newsauce;
+    extraItems.cheese = newcheese;
+    extraItems.veggies = newveggies;
+    extraItems.meat = newmeat;
+    newItem.extras = extraItems;
 
     const items = [...item];
     items.push(newItem);
     setItem(items);
 
-    alert(`${data.name} added to the cart!`);
+    setShowModal(!showModal);
+    clearExtras();
+
+    alert("Item added to the cart!");
+  };
+
+  const Add = async (data) => {
+    const quantity = prompt("Set the required quanity:");
+
+    const stockItem = {};
+    stockItem.productId = data._id;
+    stockItem.name = data.name;
+
+    if (quantity === "") {
+      stockItem.price = data.price;
+      stockItem.quantity = 1;
+    } else {
+      stockItem.price = data.price * quantity;
+      stockItem.quantity = quantity;
+    }
+
+    setNewItem(stockItem);
+
+    setShowModal(true);
   };
 
   // Addition function to find the total price
@@ -177,45 +213,58 @@ export function UserDashboard() {
         Cart,
       }}
     >
-      <div className="dashboard">
+      <section className="dashboard">
         <ImageCarousel />
         <div className="mid-align select">
           <h1>Select your me time Pizza!</h1>
         </div>
 
-        {/* Dashboard */}
-        <section className="user">
-          {loading ? (
-            <GridLoader />
-          ) : (
-            <div className="userDash">
-              {cartData.map((data) => {
-                return (
-                  <div
-                    className="mid-align imageBg"
-                    key={data._id}
-                    onClick={() => Add(data)}
-                  >
-                    <div className="priceTag">
-                      <span>₹ {data.price}</span>
-                    </div>
-
-                    {/* Image grid of the recipes on the Main Page */}
-                    <div className="mid-align image">
-                      <h2>ADD to CART</h2>
-                      <img src={data.src} alt="" />
-                    </div>
-
-                    {/* Recipe name under Image on the Main Page */}
-                    <div>
-                      <p>{data.name}</p>
-                    </div>
+        {loading ? (
+          <GridLoader />
+        ) : (
+          <div className="userDash">
+            {cartData.map((data) => {
+              return (
+                <div
+                  className="mid-align imageBg"
+                  key={data._id}
+                  onClick={() => Add(data)}
+                >
+                  <div className="priceTag">
+                    <span>₹ {data.price}</span>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </section>
+
+                  {/* Image grid of the recipes on the Main Page */}
+                  <div className="mid-align image">
+                    <h2>ADD to CART</h2>
+                    <img src={data.src} alt="" />
+                  </div>
+
+                  {/* Recipe name under Image on the Main Page */}
+                  <div>
+                    <p>{data.name}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <Extras
+          showModal={showModal}
+          addExtras={addExtras}
+          setShowModal={setShowModal}
+          setBase={setBase}
+          newsauce={newsauce}
+          setSauce={setSauce}
+          newcheese={newcheese}
+          setCheese={setCheese}
+          newveggies={newveggies}
+          setVeggies={setVeggies}
+          newmeat={newmeat}
+          setMeat={setMeat}
+          newbase={newbase}
+        />
 
         {/* Cart Button */}
         <div
@@ -233,7 +282,7 @@ export function UserDashboard() {
 
         {/* Panel for cart */}
         <CartPanel />
-      </div>
+      </section>
     </orderCheckout.Provider>
   );
 }

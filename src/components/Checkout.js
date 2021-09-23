@@ -5,6 +5,7 @@ import { orderCheckout } from "./UserDashboard";
 function Checkout() {
   const { total, item, qty, user, setItem, setShow, setQty, setTotal } =
     useContext(orderCheckout);
+
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -73,6 +74,14 @@ function Checkout() {
           };
           await axios.post("http://localhost:5000/add-order", orderData);
           await axios.post("http://localhost:5000/remove-quantity", orderData);
+          await axios.post("http://localhost:5000/remove-baseQty", orderData);
+          await axios.post("http://localhost:5000/remove-sauceQty", orderData);
+          await axios.post("http://localhost:5000/remove-cheeseQty", orderData);
+          await axios.post(
+            "http://localhost:5000/remove-veggiesQty",
+            orderData
+          );
+          await axios.post("http://localhost:5000/remove-meatQty", orderData);
 
           setItem([]);
           setTotal(0);

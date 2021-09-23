@@ -1,0 +1,117 @@
+.closeModal {
+  display: none;
+}
+
+.modal-container {
+  position: fixed;
+  backdrop-filter: blur(5px);
+  height: 100vh;
+  width: 100%;
+  background-color: #1f170dcc;
+  z-index: 100;
+  top: 0;
+  padding: 2rem;
+  display: flex;
+  font-size: 85%;
+  overflow: scroll;
+}
+
+.modal {
+  background-color: white;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px 1px #252525;
+  width: 100%;
+}
+
+.modal > h4 {
+  color: #990000;
+  margin-bottom: 5px;
+}
+
+.modal > h4 > span {
+  font-weight: 500;
+}
+
+.modal > .extras {
+  display: grid;
+  padding-bottom: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  grid-gap: 10px;
+}
+
+.modal > .extras > p {
+  color: #990000;
+  font-weight: 500;
+  background-color: #abac7f;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.modal > .extras > p:hover {
+  filter: saturate(2);
+  cursor: pointer;
+}
+
+.modal > .extras > label {
+  color: white;
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal > .extras > label > input {
+  visibility: hidden;
+}
+
+.modal > .extras > label > input:checked ~ .input-bg {
+  background-color: green;
+}
+
+.modal > .extras > label > .input-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #990000;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.modal > .extras > label:hover {
+  filter: saturate(2);
+  cursor: pointer;
+}
+
+.modal > .buttons {
+  float: right;
+}
+
+.modal > .buttons > button {
+  padding: 0.3rem 0.5rem;
+  width: 100px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 3px;
+}
+
+.modal > .buttons > button:hover {
+  filter: brightness(0.7);
+}
+
+.modal > .buttons > .btn-done {
+  background-color: green;
+  margin-right: 10px;
+}
+
+.modal > .buttons > .btn-cancel {
+  background-color: red;
+}

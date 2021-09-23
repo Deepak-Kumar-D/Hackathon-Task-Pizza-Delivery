@@ -47,7 +47,6 @@ function AdminDashboard() {
       const obj = await fetch("http://localhost:5000/orders", {
         method: "GET",
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
           "x-access-token": localStorage.getItem("admin-token"),
         },

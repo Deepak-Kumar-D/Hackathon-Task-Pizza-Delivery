@@ -1,11 +1,11 @@
 .credentials {
   padding: 2rem;
   flex-direction: column;
-  background-color: #6b3002;
+  background-color: #990000;
   min-height: 20rem;
   width: 30rem;
   border-radius: 0.2rem;
-  box-shadow: 1px 2px 20px 5px gray;
+  box-shadow: 1px 2px 10px 1px #272727;
 }
 
 .credentials p {
@@ -20,11 +20,11 @@
 }
 
 .credentials .btn {
-  color: #6b3002;
+  color: #990000;
 }
 
 .credentials .btn:hover {
-  background-color: #210e00;
+  background-color: #470202;
 }
 
 @media screen and (max-width: 600px) {

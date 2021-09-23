@@ -1,13 +1,54 @@
 .image-slide {
   margin-top: 1rem;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 3px 8px 0 #4b4b4b;
-  border-radius: 5px;
 }
 
-.image-slide img {
-  width: 100%;
+.image-slide > .slider {
+  animation: slide 20s infinite ease-in-out;
+  width: 500%;
+  left: 0;
+  position: relative;
+}
+
+.image-slide > .slider > img {
+  width: 20%;
+  float: left;
+}
+
+@keyframes slide {
+  0% {
+    left: 0;
+  }
+
+  20% {
+    left: 0;
+  }
+
+  25% {
+    left: -100%;
+  }
+
+  45% {
+    left: -100%;
+  }
+  50% {
+    left: -200%;
+  }
+
+  70% {
+    left: -200%;
+  }
+
+  75% {
+    left: -300%;
+  }
+
+  95% {
+    left: -300%;
+  }
+
+  100% {
+    left: -400%;
+  }
 }
