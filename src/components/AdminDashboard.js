@@ -125,11 +125,30 @@ function AdminDashboard() {
                       <td>{++count}</td>
                       <td>{list.order.orderId}</td>
                       <td>{list.user}</td>
-                      <td>
+                      <td className="items">
                         {list.order.items.map((item, index) => {
-                          return list.order.items.length !== index + 1
-                            ? item.name + ", "
-                            : item.name;
+                          return (
+                            <tr>
+                              <td>
+                                {item.name}
+                                <tr className="extras">
+                                  {item.extras.base}, {item.extras.sauce},{" "}
+                                  {item.extras.cheese},{" "}
+                                  {item.extras.veggies
+                                    .map((veg) => {
+                                      return veg;
+                                    })
+                                    .join(", ")}
+                                  ,{" "}
+                                  {item.extras.meat
+                                    .map((nonveg) => {
+                                      return nonveg;
+                                    })
+                                    .join(", ")}
+                                </tr>
+                              </td>
+                            </tr>
+                          );
                         })}
                       </td>
                       <td>{list.order.total_quantity}</td>

@@ -19,6 +19,11 @@ import AdminOrders from "./components/AdminOrders";
 import Orders from "./components/Orders";
 import ForgotPassword from "./components/ForgotPassword.js";
 import ResetPassword from "./components/ResetPassword";
+import AdminBase from "./components/AdminBase";
+import AdminSauce from "./components/AdminSauce";
+import AdminCheese from "./components/AdminCheese";
+import AdminVeggies from "./components/AdminVeggies";
+import AdminMeat from "./components/AdminMeat";
 
 // https://pizza-town-db.herokuapp.com/
 
@@ -95,9 +100,34 @@ function App() {
             <AdminOrders />
           </Route>
 
-          {/* Admin Dashboard */}
+          {/* Admin Products */}
           <Route path="/admin-products">
             <AdminProducts />
+          </Route>
+
+          {/* Admin Base */}
+          <Route path="/admin-base">
+            <AdminBase />
+          </Route>
+
+          {/* Admin Sauce */}
+          <Route path="/admin-sauce">
+            <AdminSauce />
+          </Route>
+
+          {/* Admin Cheese */}
+          <Route path="/admin-cheese">
+            <AdminCheese />
+          </Route>
+
+          {/* Admin Veggies */}
+          <Route path="/admin-veggies">
+            <AdminVeggies />
+          </Route>
+
+          {/* Admin Meat */}
+          <Route path="/admin-meat">
+            <AdminMeat />
           </Route>
 
           {/* Admin Logout */}

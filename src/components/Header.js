@@ -39,6 +39,21 @@ export function Header({ nav }) {
             <Link to="/admin-products">Products</Link>
           </li>
           <li>
+            <Link to="/admin-base">Base</Link>
+          </li>
+          <li>
+            <Link to="/admin-sauce">Sauce</Link>
+          </li>
+          <li>
+            <Link to="/admin-cheese">Cheese</Link>
+          </li>
+          <li>
+            <Link to="/admin-veggies">Veggies</Link>
+          </li>
+          <li>
+            <Link to="/admin-meat">Meat</Link>
+          </li>
+          <li>
             <Link to="/admin-logout">Logout</Link>
           </li>
         </ul>

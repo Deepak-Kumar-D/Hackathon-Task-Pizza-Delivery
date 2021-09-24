@@ -60,11 +60,30 @@ function Orders() {
                     <tr key={list._id}>
                       <td>{++count}</td>
                       <td>{list._id}</td>
-                      <td>
+                      <td className="items">
                         {list.items.map((item, index) => {
-                          return list.items.length !== index + 1
-                            ? item.name + ", "
-                            : item.name;
+                          return (
+                            <tr>
+                              <td>
+                                {item.name}
+                                <tr className="extras">
+                                  {item.extras.base}, {item.extras.sauce},{" "}
+                                  {item.extras.cheese},{" "}
+                                  {item.extras.veggies
+                                    .map((veg) => {
+                                      return veg;
+                                    })
+                                    .join(", ")}
+                                  ,{" "}
+                                  {item.extras.meat
+                                    .map((nonveg) => {
+                                      return nonveg;
+                                    })
+                                    .join(", ")}
+                                </tr>
+                              </td>
+                            </tr>
+                          );
                         })}
                       </td>
                       <td>{list.total_quantity}</td>

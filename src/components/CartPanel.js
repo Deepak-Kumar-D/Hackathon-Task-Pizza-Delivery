@@ -74,7 +74,7 @@ export function CartPanel() {
                           .
                         </span>
                       </td>
-                      <td>${cartItems.price}</td>
+                      <td>₹{cartItems.price}</td>
                       <td>{cartItems.quantity}</td>
                       <td onClick={() => removeItem(index)}>
                         <IoBagRemoveSharp />
@@ -90,7 +90,7 @@ export function CartPanel() {
           <div className="totalPrice">
             <h3>
               Total:
-              <span>${item.length === 0 ? 0 : total}</span>
+              <span>₹{item.length === 0 ? 0 : total}</span>
             </h3>
 
             <hr style={{ width: "100%" }} />

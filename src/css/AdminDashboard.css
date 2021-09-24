@@ -56,6 +56,16 @@
   text-align: center;
 }
 
+.orders-table > table > tbody > tr > .items {
+  text-align: left;
+  font-size: medium;
+}
+
+.orders-table > table > tbody > tr .extras {
+  font-size: small;
+  color: #ff0000;
+}
+
 .orders-table > table > tbody > tr > td:nth-child(2) {
   text-align: left;
 }

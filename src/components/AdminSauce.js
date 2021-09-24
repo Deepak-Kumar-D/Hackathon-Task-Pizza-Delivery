@@ -4,7 +4,7 @@ import { GridLoader } from "react-spinners";
 import "../css/AdminProducts.css";
 import axios from "axios";
 
-function AdminProducts() {
+function AdminSauce() {
   const { loading, setLoading, setNav } = useContext(showLoad);
   const [product, setProduct] = useState([]);
   const [qty, setQty] = useState(parseInt());
@@ -16,7 +16,7 @@ function AdminProducts() {
       data.id = id;
       data.qty = qty;
 
-      await axios.post("http://localhost:5000/add-quantity", data);
+      await axios.post("http://localhost:5000/add-sauceQty", data);
       setQty();
 
       alert(`${qty} quantities of ${name} has been added.`);
@@ -28,10 +28,9 @@ function AdminProducts() {
   useEffect(() => {
     const productList = async () => {
       try {
-        const obj = await fetch("http://localhost:5000/products", {
+        const obj = await fetch("http://localhost:5000/admin-sauce", {
           method: "GET",
           headers: {
-            Accept: "application/json",
             "Content-Type": "application/json",
             "x-access-token": localStorage.getItem("admin-token"),
           },
@@ -39,7 +38,7 @@ function AdminProducts() {
         });
 
         const data = await obj.json();
-        setProduct(data.products);
+        setProduct(data.sauce);
         setNav(data.admin.type);
 
         if (obj.status !== 200) {
@@ -55,7 +54,7 @@ function AdminProducts() {
   }, [setLoading, setNav]);
   return (
     <section className="orders">
-      <h3>Product Stock</h3>
+      <h3>Sauce Stock</h3>
       {loading ? (
         <GridLoader />
       ) : (
@@ -107,4 +106,4 @@ function AdminProducts() {
   );
 }
 
-export default AdminProducts;
+export default AdminSauce;
