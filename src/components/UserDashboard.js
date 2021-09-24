@@ -30,7 +30,7 @@ export function UserDashboard() {
 
   const Cart = async () => {
     setLoading(true);
-    const obj = await fetch("http://localhost:5000/get-cart", {
+    const obj = await fetch("https://pizza-town-db.herokuapp.com/get-cart", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -122,7 +122,7 @@ export function UserDashboard() {
 
   useEffect(() => {
     const addCart = async () => {
-      await fetch("http://localhost:5000/add-cart", {
+      await fetch("https://pizza-town-db.herokuapp.com/add-cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,14 +143,17 @@ export function UserDashboard() {
     const dashboard = async () => {
       setLoading(true);
       try {
-        const obj = await fetch("http://localhost:5000/dashboard", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "x-access-token": localStorage.getItem("token"),
-          },
-          credentials: "include",
-        });
+        const obj = await fetch(
+          "https://pizza-town-db.herokuapp.com/dashboard",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": localStorage.getItem("token"),
+            },
+            credentials: "include",
+          }
+        );
 
         const data = await obj.json();
 
@@ -171,14 +174,17 @@ export function UserDashboard() {
     const Products = async () => {
       setLoading(true);
       try {
-        const obj = await fetch("http://localhost:5000/user-products", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "x-access-token": localStorage.getItem("token"),
-          },
-          credentials: "include",
-        });
+        const obj = await fetch(
+          "https://pizza-town-db.herokuapp.com/user-products",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": localStorage.getItem("token"),
+            },
+            credentials: "include",
+          }
+        );
 
         const data = await obj.json();
         setCartData(data.products);

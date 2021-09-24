@@ -7,14 +7,13 @@ function AdminVerify() {
   const history = useHistory();
 
   const Verification = async () => {
-    const obj = await fetch(`http://localhost:5000/admin-verify/${token}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-
-    // const obj = await axios.get(`http://localhost:5000/admin-verify/${token}`);
-
-    console.log("obj");
+    const obj = await fetch(
+      `https://pizza-town-db.herokuapp.com/admin-verify/${token}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     if (obj.status === 200) {
       alert("Your account has been verified!\nPlease Login.");

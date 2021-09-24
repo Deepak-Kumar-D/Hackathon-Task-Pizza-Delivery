@@ -25,8 +25,6 @@ import AdminCheese from "./components/AdminCheese";
 import AdminVeggies from "./components/AdminVeggies";
 import AdminMeat from "./components/AdminMeat";
 
-// https://pizza-town-db.herokuapp.com/
-
 export const showLoad = createContext(null);
 
 function App() {

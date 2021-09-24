@@ -20,7 +20,7 @@ export function AdminLogin() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const obj = await fetch("http://localhost:5000/admin-login", {
+    const obj = await fetch("https://pizza-town-db.herokuapp.com/admin-login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

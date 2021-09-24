@@ -32,7 +32,10 @@ function Checkout() {
 
     const pay = { total: total };
 
-    const result = await axios.post("http://localhost:5000/payment", pay);
+    const result = await axios.post(
+      "https://pizza-town-db.herokuapp.com/payment",
+      pay
+    );
 
     if (!result) {
       alert("Server error. Are you online?");
@@ -58,7 +61,7 @@ function Checkout() {
         };
 
         const result = await axios.post(
-          "http://localhost:5000/payment/success",
+          "https://pizza-town-db.herokuapp.com/payment/success",
           data
         );
 
@@ -72,16 +75,34 @@ function Checkout() {
             total_price: total,
             items: item,
           };
-          await axios.post("http://localhost:5000/add-order", orderData);
-          await axios.post("http://localhost:5000/remove-quantity", orderData);
-          await axios.post("http://localhost:5000/remove-baseQty", orderData);
-          await axios.post("http://localhost:5000/remove-sauceQty", orderData);
-          await axios.post("http://localhost:5000/remove-cheeseQty", orderData);
           await axios.post(
-            "http://localhost:5000/remove-veggiesQty",
+            "https://pizza-town-db.herokuapp.com/add-order",
             orderData
           );
-          await axios.post("http://localhost:5000/remove-meatQty", orderData);
+          await axios.post(
+            "https://pizza-town-db.herokuapp.com/remove-quantity",
+            orderData
+          );
+          await axios.post(
+            "https://pizza-town-db.herokuapp.com/remove-baseQty",
+            orderData
+          );
+          await axios.post(
+            "https://pizza-town-db.herokuapp.com/remove-sauceQty",
+            orderData
+          );
+          await axios.post(
+            "https://pizza-town-db.herokuapp.com/remove-cheeseQty",
+            orderData
+          );
+          await axios.post(
+            "https://pizza-town-db.herokuapp.com/remove-veggiesQty",
+            orderData
+          );
+          await axios.post(
+            "https://pizza-town-db.herokuapp.com/remove-meatQty",
+            orderData
+          );
 
           setItem([]);
           setTotal(0);

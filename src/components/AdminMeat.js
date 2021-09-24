@@ -16,7 +16,7 @@ function AdminMeat() {
       data.id = id;
       data.qty = qty;
 
-      await axios.post("http://localhost:5000/add-meatQty", data);
+      await axios.post("https://pizza-town-db.herokuapp.com/add-meatQty", data);
       setQty();
 
       alert(`${qty} quantities of ${name} has been added.`);
@@ -28,14 +28,17 @@ function AdminMeat() {
   useEffect(() => {
     const productList = async () => {
       try {
-        const obj = await fetch("http://localhost:5000/admin-meat", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "x-access-token": localStorage.getItem("admin-token"),
-          },
-          credentials: "include",
-        });
+        const obj = await fetch(
+          "https://pizza-town-db.herokuapp.com/admin-meat",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": localStorage.getItem("admin-token"),
+            },
+            credentials: "include",
+          }
+        );
 
         const data = await obj.json();
         setProduct(data.meat);

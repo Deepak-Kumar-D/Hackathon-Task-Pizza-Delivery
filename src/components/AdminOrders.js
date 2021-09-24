@@ -12,7 +12,7 @@ function AdminOrders() {
     const orderList = async () => {
       setLoading(true);
       try {
-        const obj = await fetch("http://localhost:5000/orders", {
+        const obj = await fetch("https://pizza-town-db.herokuapp.com/orders", {
           method: "GET",
           headers: {
             Accept: "application/json",

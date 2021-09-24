@@ -19,13 +19,16 @@ export default function ForgotPassword() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const obj = await fetch("http://localhost:5000/forgot-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: data.email,
-      }),
-    });
+    const obj = await fetch(
+      "https://pizza-town-db.herokuapp.com/forgot-password",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.email,
+        }),
+      }
+    );
 
     if (obj.status !== 422) {
       alert("Please check your Email to reset the password.");

@@ -15,14 +15,17 @@ function AdminDashboard() {
     const adminDashboard = async () => {
       setLoading(true);
       try {
-        const obj = await fetch("http://localhost:5000/admin-dashboard", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "x-access-token": localStorage.getItem("admin-token"),
-          },
-          credentials: "include",
-        });
+        const obj = await fetch(
+          "https://pizza-town-db.herokuapp.com/admin-dashboard",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": localStorage.getItem("admin-token"),
+            },
+            credentials: "include",
+          }
+        );
 
         const data = await obj.json();
 
@@ -44,7 +47,7 @@ function AdminDashboard() {
 
   const orderList = async () => {
     try {
-      const obj = await fetch("http://localhost:5000/orders", {
+      const obj = await fetch("https://pizza-town-db.herokuapp.com/orders", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +81,7 @@ function AdminDashboard() {
   const showStatus = async (e, userId, listId, orderId) => {
     let status = e.target.value;
 
-    await fetch("http://localhost:5000/update-status", {
+    await fetch("https://pizza-town-db.herokuapp.com/update-status", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

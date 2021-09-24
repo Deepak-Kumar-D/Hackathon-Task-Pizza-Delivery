@@ -34,7 +34,7 @@ export function CreateUser() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const obj = await fetch("http://localhost:5000/register", {
+    const obj = await fetch("https://pizza-town-db.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",

@@ -34,19 +34,22 @@ export function CreateAdmin() {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const obj = await fetch("http://localhost:5000/admin-register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/JSON",
-      },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        address: data.address,
-        password: data.password,
-      }),
-    });
+    const obj = await fetch(
+      "https://pizza-town-db.herokuapp.com/admin-register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/JSON",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+          password: data.password,
+        }),
+      }
+    );
 
     if (obj.status !== 422) {
       toast.success(

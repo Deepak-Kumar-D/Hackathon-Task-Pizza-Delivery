@@ -49,7 +49,7 @@ function Extras({
 
   useEffect(() => {
     const baseStock = async () => {
-      const obj = await axios.get("http://localhost:5000/base", {
+      const obj = await axios.get("https://pizza-town-db.herokuapp.com/base", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -59,7 +59,7 @@ function Extras({
     };
 
     const sauceStock = async () => {
-      const obj = await axios.get("http://localhost:5000/sauce", {
+      const obj = await axios.get("https://pizza-town-db.herokuapp.com/sauce", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -69,27 +69,33 @@ function Extras({
     };
 
     const cheeseStock = async () => {
-      const obj = await axios.get("http://localhost:5000/cheese", {
-        headers: {
-          "x-access-token": localStorage.getItem("token"),
-        },
-      });
+      const obj = await axios.get(
+        "https://pizza-town-db.herokuapp.com/cheese",
+        {
+          headers: {
+            "x-access-token": localStorage.getItem("token"),
+          },
+        }
+      );
 
       setCheeseData(obj.data.cheese);
     };
 
     const veggiesStock = async () => {
-      const obj = await axios.get("http://localhost:5000/veggies", {
-        headers: {
-          "x-access-token": localStorage.getItem("token"),
-        },
-      });
+      const obj = await axios.get(
+        "https://pizza-town-db.herokuapp.com/veggies",
+        {
+          headers: {
+            "x-access-token": localStorage.getItem("token"),
+          },
+        }
+      );
 
       setVeggiesData(obj.data.veggies);
     };
 
     const meatStock = async () => {
-      const obj = await axios.get("http://localhost:5000/meat", {
+      const obj = await axios.get("https://pizza-town-db.herokuapp.com/meat", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },

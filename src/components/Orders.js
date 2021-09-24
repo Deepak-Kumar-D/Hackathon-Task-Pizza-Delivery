@@ -12,14 +12,17 @@ function Orders() {
 
   useEffect(() => {
     const Orders = async () => {
-      const obj = await fetch("http://localhost:5000/user-orders", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": localStorage.getItem("token"),
-        },
-        credentials: "include",
-      });
+      const obj = await fetch(
+        "https://pizza-town-db.herokuapp.com/user-orders",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.getItem("token"),
+          },
+          credentials: "include",
+        }
+      );
 
       const data = await obj.json();
 
